@@ -16,7 +16,7 @@ if __name__ == "__main__":
     mu = 0
     
     # default deviation of the distribution
-    sigma = 0
+    sigma = 1
     
 
     # default number of samples (per experiment)
@@ -28,7 +28,19 @@ if __name__ == "__main__":
     # output file defaults
     doOutputFile = False
 
-    # read the user-provided seed from the command line (if there)
+    if '-h' in sys.argv or '--help' in sys.argv or not haveH0:
+        print ("Usage: %s [options]" % sys.argv[0])
+        print ("  options:")
+        print ("   --help(-h)          print options")
+        print ("   -seed [number] seed for random number generation")
+        print ("   -mu [number] mean for the gaussian distribution")
+        print ("   -sigma [number] standard deviation for the gaussian distribution")
+        print ("   -Nsample [number] number of samples for each experiment")
+        print ("   -Nexp [number] number of experiments")
+        print ("   -output [.npy file] output file saved in the .npy format")
+        print
+        sys.exit(1)
+    
     if '-seed' in sys.argv:
         p = sys.argv.index('-seed')
         seed = sys.argv[p+1]
@@ -62,5 +74,5 @@ if __name__ == "__main__":
         S = np.zeros((Nexp,Nsample))
         for e in range(Nexp):
             S[e] = G.Gaussian_sample(mu,Nsample)
-        np.save(outfile, S)
+        np.save(OutputFileName, S)
    
