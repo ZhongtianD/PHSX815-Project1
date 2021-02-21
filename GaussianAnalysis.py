@@ -12,7 +12,7 @@ from Random import Gaussian
 # main function for our coin toss Python code
 if __name__ == "__main__":
     
-    
+    #default sigma value
     sigma = 1
     # default mean value for hypothesis 0
     mu_0 = 0
@@ -88,6 +88,8 @@ if __name__ == "__main__":
             LogLikeRatio1.append(LLR)
 
     title = str(Nsample) +  " samples / experiment"
+    LogLikeRatio0.sort()
+    LogLikeRatio1.sort()
     alpha = LogLikeRatio0[95*len(LogLikeRatio0)//100]
     res = next(i for i,v in enumerate(LogLikeRatio1) if v > alpha)
     beta = res/len(LogLikeRatio1)
