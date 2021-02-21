@@ -88,6 +88,9 @@ if __name__ == "__main__":
             LogLikeRatio1.append(LLR)
 
     title = str(Nsample) +  " samples / experiment"
+    alpha = LogLikeRatio0[95*len(LogLikeRatio0)//100]
+    res = next(i for i,v in enumerate(LogLikeRatio1) if v > alpha)
+    beta = res/len(LogLikeRatio1)
     
 
     # make LLR figure
