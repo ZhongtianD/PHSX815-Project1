@@ -52,13 +52,13 @@ if __name__ == "__main__":
     LLR_min = 1e8
     LLR_max = -1e8
         
-    file1 = np.load(InputFile0)
-    Nsample = file1.shape[1]
+    file0 = np.load(InputFile0)
+    Nsample = file0.shape[1]
         
-    for i in range(ifile.shape[0]):
+    for i in range(file0.shape[0]):
         Nsum = 0
         LLR = 0
-        for v in ifile[i]:
+        for v in file0[i]:
             LLR += G_1.loglike(v)-G_0.loglike(v)
 
                 
@@ -71,11 +71,11 @@ if __name__ == "__main__":
         LogLikeRatio0.append(LLR)
 
     if haveH1:
-        file2 = np.load(InputFile0)
+        file1 = np.load(InputFile1)
             
-        for i in range(file2.shape[0]):
+        for i in range(file1.shape[0]):
             LLR = 0
-            for v in ifile[i]:
+            for v in file1[i]:
                 LLR += G_1.loglike(v)-G_0.loglike(v)
 
                 
