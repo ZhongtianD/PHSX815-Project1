@@ -1,16 +1,16 @@
-#! /usr/bin/env python
+
 
 import numpy as np
+#temp solution until seeding problem is resolved.
+from numpy.random import MT19937
+from numpy.random import RandomState, SeedSequence
 
-#################
-# Random class
-#################
 # class that can generate random numbers
 class Random:
     """A random number generator class"""
 
     # initialization method for Random class
-    def __init__(self, seed = 5555, mu = 0, sigma = 1):
+    def __init__(self, seed = 5555):
         self.seed = seed
         self.m_v = np.uint64(4101842887655102017)
         self.m_w = np.uint64(1)
@@ -22,9 +22,6 @@ class Random:
         self.int64()
         self.m_w = self.m_v
         self.int64()
-        
-        self.mu = mu
-        self.sigma = sigma
 
     # function returns a random 64 bit integer
     def int64(self):
@@ -46,7 +43,7 @@ class Random:
 class Gaussian:
     
     def __init__(self, seed = 5555, mu = 0, sigma = 1):
-        self.random = Random(seed)
+        self.random = RandomState(MT19937(SeedSequence(seed)))
         
         self.mu = mu
         self.sigma = sigma
