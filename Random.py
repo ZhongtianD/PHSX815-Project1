@@ -43,7 +43,7 @@ class Random:
 class Gaussian:
     
     def __init__(self, seed = 5555, mu = 0, sigma = 1):
-        self.random = RandomState(MT19937(SeedSequence(seed)))
+        self.random = RandomState(MT19937(SeedSequence(int(seed))))
         
         self.mu = mu
         self.sigma = sigma
