@@ -23,18 +23,6 @@ if __name__ == "__main__":
     haveH0 = False
     haveH1 = False
 
-    if '-h' in sys.argv or '--help' in sys.argv or not haveH0:
-        print ("Usage: %s [options]" % sys.argv[0])
-        print ("  options:")
-        print ("   --help(-h)          print options")
-        print ("   -input0 [filename]  name of file for H0 data")
-        print ("   -input1 [filename]  name of file for H1 data")
-        print ("   -mu0 [number]     mean for H0")
-        print ("   -mu1 [number]     mean for H1")
-        print ("   -sigma [number]   sigma for H0 and H1")
-        print
-        sys.exit(1)
-
     if '-mu0' in sys.argv:
         p = sys.argv.index('-mu0')
         mu_0 = float(sys.argv[p+1])
@@ -54,6 +42,17 @@ if __name__ == "__main__":
         p = sys.argv.index('-input1')
         InputFile1 = sys.argv[p+1]
         haveH1 = True
+    if '-h' in sys.argv or '--help' in sys.argv or not haveH1:
+        print ("Usage: %s [options]" % sys.argv[0])
+        print ("  options:")
+        print ("   --help(-h)          print options")
+        print ("   -input0 [filename]  name of file for H0 data")
+        print ("   -input1 [filename]  name of file for H1 data")
+        print ("   -mu0 [number]     mean for H0")
+        print ("   -mu1 [number]     mean for H1")
+        print ("   -sigma [number]   sigma for H0 and H1")
+        print
+        sys.exit(1)
     
     Nsample = 1
     LogLikeRatio0 = []
