@@ -52,11 +52,28 @@ if __name__ == "__main__":
     LLR_min = 1e8
     LLR_max = -1e8
         
-    with np.load(InputFile0) as ifile:
-        Nsample = ifile.shape[1]
+    file1 = np.load(InputFile0)
+    Nsample = file1.shape[1]
         
-        for i in range(ifile.shape[0]):
-            Nsum = 0
+    for i in range(ifile.shape[0]):
+        Nsum = 0
+        LLR = 0
+        for v in ifile[i]:
+            LLR += G_1.loglike(v)-G_0.loglike(v)
+
+                
+                    
+
+        if LLR < LLR_min:
+              LLR_min = LLR
+        if LLR > LLR_max:
+              LLR_max = LLR
+        LogLikeRatio0.append(LLR)
+
+    if haveH1:
+        file2 = np.load(InputFile0)
+            
+        for i in range(file2.shape[0]):
             LLR = 0
             for v in ifile[i]:
                 LLR += G_1.loglike(v)-G_0.loglike(v)
@@ -68,24 +85,7 @@ if __name__ == "__main__":
                 LLR_min = LLR
             if LLR > LLR_max:
                 LLR_max = LLR
-            LogLikeRatio0.append(LLR)
-
-    if haveH1:
-        with np.load(InputFile0) as ifile:
-            
-            for i in range(ifile.shape[0]):
-                LLR = 0
-                for v in ifile[i]:
-                    LLR += G_1.loglike(v)-G_0.loglike(v)
-
-                
-                    
-
-                if LLR < LLR_min:
-                    LLR_min = LLR
-                if LLR > LLR_max:
-                    LLR_max = LLR
-                LogLikeRatio1.append(LLR)
+            LogLikeRatio1.append(LLR)
 
     title = str(Nsample) +  " samples / experiment"
     
