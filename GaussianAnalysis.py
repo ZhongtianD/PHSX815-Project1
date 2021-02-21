@@ -23,6 +23,18 @@ if __name__ == "__main__":
     haveH0 = False
     haveH1 = False
 
+    if '-h' in sys.argv or '--help' in sys.argv or not haveH0:
+        print ("Usage: %s [options]" % sys.argv[0])
+        print ("  options:")
+        print ("   --help(-h)          print options")
+        print ("   -input0 [filename]  name of file for H0 data")
+        print ("   -input1 [filename]  name of file for H1 data")
+        print ("   -mu0 [number]     mean for H0")
+        print ("   -mu1 [number]     mean for H1")
+        print ("   -sigma [number]   sigma for H0 and H1")
+        print
+        sys.exit(1)
+
     if '-mu0' in sys.argv:
         p = sys.argv.index('-mu0')
         mu_0 = float(sys.argv[p+1])
@@ -97,8 +109,8 @@ if __name__ == "__main__":
 
     # make LLR figure
     plt.figure()
-    plt.hist(LogLikeRatio0, Nsample+1, density=True, facecolor='b', alpha=0.5, label="assuming $\\mathbb{H}_0$")
-    plt.hist(LogLikeRatio1, Nsample+1, density=True, facecolor='g', alpha=0.5, label="assuming $\\mathbb{H}_1$")
+    plt.hist(LogLikeRatio0, 50, density=True, facecolor='b', alpha=0.5, label="assuming $\\mathbb{H}_0$")
+    plt.hist(LogLikeRatio1, 50, density=True, facecolor='g', alpha=0.5, label="assuming $\\mathbb{H}_1$")
     plt.axvline(alpha, color='r', linewidth=1, label='$\\lambda_\\alpha$')
     plt.plot([], [], ' ', label="$\\alpha = 0.05$")
     plt.plot([], [], ' ', label="$\\beta = $"+str(beta) ) 
