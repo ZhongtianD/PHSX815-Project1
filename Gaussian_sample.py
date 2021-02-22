@@ -73,6 +73,7 @@ if __name__ == "__main__":
     if doOutputFile:
         S = np.zeros((Nexp,Nsample))
         for e in range(Nexp):
-            S[e] = G.Gaussian_sample(mu,Nsample)
+            x = np.random.rand()
+            S[e] = G.Gaussian_sample(mu+x*sigma,Nsample)
         np.save(OutputFileName, S)
    
