@@ -1,48 +1,15 @@
 
 
 import numpy as np
-#temp solution until seeding problem is resolved.
+
 from numpy.random import MT19937
 from numpy.random import RandomState, SeedSequence
 
-# class that can generate random numbers
-class Random:
-    """A random number generator class"""
 
-    # initialization method for Random class
-    def __init__(self, seed = 5555):
-        self.seed = seed
-        self.m_v = np.uint64(4101842887655102017)
-        self.m_w = np.uint64(1)
-        self.m_u = np.uint64(1)
-        
-        self.m_u = np.uint64(self.seed) ^ self.m_v
-        self.int64()
-        self.m_v = self.m_u
-        self.int64()
-        self.m_w = self.m_v
-        self.int64()
-
-    # function returns a random 64 bit integer
-    def int64(self):
-        self.m_u = np.uint64(self.m_u * 2862933555777941757) + np.uint64(7046029254386353087)
-        self.m_v ^= self.m_v >> np.uint64(17)
-        self.m_v ^= self.m_v << np.uint64(31)
-        self.m_v ^= self.m_v >> np.uint64(8)
-        self.m_w = np.uint64(np.uint64(4294957665)*(self.m_w & np.uint64(0xffffffff))) + np.uint64((self.m_w >> np.uint64(32)))
-        x = np.uint64(self.m_u ^ (self.m_u << np.uint64(21)))
-        x ^= x >> np.uint64(35)
-        x ^= x << np.uint64(4)
-        with np.errstate(over='ignore'):
-            return (x + self.m_v)^self.m_w
-
-    # function returns a random floating point number between (0, 1) (uniform)
-    def rand(self):
-        return 5.42101086242752217E-20 * self.int64()
     
 class Gaussian:
     
-    def __init__(self, seed = 5555, mu = 0, sigma = 1):
+    def __init__(self, seed = 1010, mu = 0, sigma = 1):
         self.random = RandomState(MT19937(SeedSequence(int(seed))))
         
         self.mu = mu
