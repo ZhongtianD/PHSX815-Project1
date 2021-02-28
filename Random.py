@@ -38,7 +38,9 @@ class Gaussian:
 
         # initialize
         x_0 = init
-
+        
+        
+        #generate a sequence of Nsample samples.
         for i in range(Nsample):
             p_0 = pdf(x_0)
             
