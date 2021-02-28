@@ -67,11 +67,12 @@ if __name__ == "__main__":
         OutputFileName = sys.argv[p+1]
         doOutputFile = True
 
-    # class instance of our Random class using seed
+    # Initialze an object of the Gaussian class
     G = Gaussian(seed =seed, mu=mu, sigma =sigma)
 
     if doOutputFile:
         S = np.zeros((Nexp,Nsample))
+        #Generate samples
         for e in range(Nexp):
             x = np.random.rand()
             S[e] = G.Gaussian_sample(mu+x*sigma,Nsample)
